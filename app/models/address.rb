@@ -1,2 +1,3 @@
 class Address < ApplicationRecord
-end
+  has_and_belong_to_many : customers
+end 
