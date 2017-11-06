@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171105212533) do
+ActiveRecord::Schema.define(version: 20171106225925) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -27,7 +27,6 @@ ActiveRecord::Schema.define(version: 20171105212533) do
   end
 
   create_table "addresses", force: :cascade do |t|
-    t.integer "city_id"
     t.string "address"
     t.boolean "is_billing_address"
     t.string "number"
@@ -63,14 +62,12 @@ ActiveRecord::Schema.define(version: 20171105212533) do
   end
 
   create_table "cities", force: :cascade do |t|
-    t.integer "country_id"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "countries", force: :cascade do |t|
-    t.integer "state_id"
     t.string "name"
     t.string "code"
     t.datetime "created_at", null: false
@@ -95,7 +92,6 @@ ActiveRecord::Schema.define(version: 20171105212533) do
   end
 
   create_table "items", force: :cascade do |t|
-    t.integer "product_id"
     t.integer "qnty"
     t.decimal "price"
     t.datetime "created_at", null: false
@@ -103,8 +99,6 @@ ActiveRecord::Schema.define(version: 20171105212533) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "customer_id"
-    t.integer "item_id"
     t.integer "payment_id"
     t.integer "status_id"
     t.datetime "created_at", null: false
@@ -118,7 +112,6 @@ ActiveRecord::Schema.define(version: 20171105212533) do
   end
 
   create_table "payments", force: :cascade do |t|
-    t.integer "payment_method_id"
     t.string "credit_card_number"
     t.string "card_holder_name"
     t.datetime "expiration"
@@ -130,7 +123,6 @@ ActiveRecord::Schema.define(version: 20171105212533) do
   end
 
   create_table "products", force: :cascade do |t|
-    t.integer "category_id"
     t.string "name"
     t.string "description"
     t.integer "qty"
@@ -138,6 +130,8 @@ ActiveRecord::Schema.define(version: 20171105212533) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image"
+    t.integer "category_id"
+    t.index ["category_id"], name: "index_products_on_category_id"
   end
 
   create_table "states", force: :cascade do |t|
@@ -154,7 +148,6 @@ ActiveRecord::Schema.define(version: 20171105212533) do
   end
 
   create_table "sub_categories", force: :cascade do |t|
-    t.integer "category_id"
     t.string "name"
     t.string "description"
     t.datetime "created_at", null: false
