@@ -1,4 +1,5 @@
 class AboutController < ApplicationController
-  def index
+  def about
+    @about = About.first
   end
 end
