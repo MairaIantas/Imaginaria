@@ -60,3 +60,4 @@ gem 'activeadmin', github: 'activeadmin'
 gem 'devise'
 
 gem 'carrierwave', '~> 1.0'
+gem 'will_paginate', '>= 3.1'
