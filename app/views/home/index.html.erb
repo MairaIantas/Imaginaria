@@ -1,6 +1,5 @@
 <!-- Page Content -->
  <div class="col-lg-3">
-
    <h1 class="my-4">Home</h1>
    <div class="list-group">
      <% @categories.each do |category| %>
@@ -9,12 +8,12 @@
         </div>
      <% end %>
    </div>
-
  </div>
  <!-- /.col-lg-3 -->
 
+<!-- .col-lg-9 -->
  <div class="col-lg-9">
-
+   <!-- Carousel -->
    <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
      <ol class="carousel-indicators">
        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -41,11 +40,15 @@
        <span class="sr-only">Next</span>
      </a>
    </div>
+   <!-- /Carousel -->
 
+   <!-- Content -->
    <%= render partial: 'common/products', object: @products %>
-   <!-- /.row -->
+   <!-- /Content -->
  </div>
  <!-- /.col-lg-9 -->
+
+ <!-- Pagination -->
 <div class="container">
   <div class="apple_pagination">
      <div class="page_info">
@@ -54,3 +57,4 @@
        <%= will_paginate @products, :container => false %>
    </div>
  </div>
+ <!-- Pagination -->

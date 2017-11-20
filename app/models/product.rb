@@ -5,7 +5,7 @@ class Product < ApplicationRecord
 
   def self.search(term, page)
     if term
-      where('name LIKE ? ', "%#{term}").paginate(page: page, per_page: 2).order('id DESC')
+      where("name LIKE ? or description LIKE ?  ", "%#{term}%", "%#{term}%").paginate(page: page, per_page: 2).order('id DESC')
     else
       paginate(page: page, per_page: 3).order('id DESC')
     end
