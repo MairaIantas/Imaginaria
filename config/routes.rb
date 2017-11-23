@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  get 'categories/show'
+  # get 'categories/show'
   get '/about', to: 'about#about', as: 'about'
   get '/contact', to: 'contact#contact', as: 'contact'
 

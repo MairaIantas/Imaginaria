@@ -25,6 +25,7 @@
         <a class="navbar-brand" href=<%=root_path %>> Imaginaria</a>
         <div class="mx-auto" style="width: 300px;">
           <%= form_tag(root_path, :method => "get", id: "search-form") do %>
+          <%= hidden_field_tag :category_id, params[:id] %>
            <%= text_field_tag :term, params[:term], placeholder: "Search Products" %>
            <%= submit_tag "Search", :name => nil%>
          <% end %>
