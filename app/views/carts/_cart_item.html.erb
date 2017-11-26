@@ -1,4 +1,4 @@
-<% if !@order_item.nil? && @order_item.errors.any? %>
+<% if @order_item.nil? && @order_item.errors.any? %>
 	<ul>
 		<% @order_item.errors.full_messages.each do |msg| %>
 			<li><%= msg %></li>
@@ -6,26 +6,26 @@
 	</ul>
 <% end %>
 
-<% if @order_items.size > 0 %>
-	<% @order_items.each do |item| %>
+<% if @order_item.size > 0 %>
+	<% @order_item.each do |item| %>
 		<div class="well">
 			<div class="row">
 				<div class="col-sm-8">
-					<h3><%= item.product.title %></h3>
+					<h3><%= item.product.name %></h3>
 				</div>
 				<div class="col-sm-4">
 					<div class="pull-right">
 					<%= form_for(item, remote: true) do |f| %>
 						<%= f.hidden_field :product_id, value: item.product.id %>
-						<h5><%= item.prodappuct.price %></h5>
+						<h5><%= item.product.price %></h5>
 						<div class="form-group">
-							<%= f.text_field :quantity, value: item.qnty.to_i, min: 1, class: 'form-control' %>
+							<%= f.text_field :qnty, value: item.qnty.to_i, min: 1, class: 'form-control' %>
 						</div>
 						<div class="btn-group">
 							<%= f.submit "Update Quantity", class: 'btn btn-primary' %>
 							<%= link_to "Delete", item, method: :delete, remote: true, class: 'btn btn-danger'  %>
 						</div>
-						<span>Total Price: <%= item.total_price %></span>
+						<span>Total Price: <%= item.qnty * item.price %></span>
 					<% end %>
 					</div>
 				</div>
