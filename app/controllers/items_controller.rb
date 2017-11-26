@@ -18,7 +18,7 @@ class ItemsController < ApplicationController
     @order = current_order
     @order_item = @order.items.find(params[:id])
     @order_item.destroy
-    @order_items = @order.items
+    @order_item = @order.items
   end
 
   private
