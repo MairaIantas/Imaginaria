@@ -3,7 +3,7 @@ module ApplicationHelper
 		if !session[:order_id].nil?
 			Order.find(session[:order_id])
 		else
-			Order.new
+      current_customer.orders.build
 		end
 	end
 end
