@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  get 'charges/new'
-
-  get 'charges/create'
-
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
@@ -17,4 +13,5 @@ Rails.application.routes.draw do
   resources :categories, only: [:show]
   resources :items
   resource :carts, only: [:show]
+  resources :charges, only: [:new, :create]
 end
