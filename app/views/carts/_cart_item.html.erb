@@ -5,7 +5,6 @@
 		<% end %>
 	</ul>
 <% end %>
-
 <% if @order_item.size > 0 %>
 	<% @order_item.each do |item| %>
 		<div class="well">
@@ -17,7 +16,7 @@
 					<div class="pull-right">
 					<%= form_for(item, remote: true) do |f| %>
 						<%= f.hidden_field :product_id, value: item.product.id %>
-						<h5><%= item.product.price %></h5>
+						<h5><%= number_to_currency(item.product.price) %></h5>
 						<div class="form-group">
 							<%= f.text_field :qnty, value: item.qnty.to_i, min: 1, class: 'form-control' %>
 						</div>
@@ -25,13 +24,16 @@
 							<%= f.submit "Update Quantity", class: 'btn btn-primary' %>
 							<%= link_to "Delete", item, method: :delete, remote: true, class: 'btn btn-danger'  %>
 						</div>
-						<span>Total Price: <%= item.qnty * item.price %></span>
 					<% end %>
 					</div>
 				</div>
 			</div>
 		</div>
 	<% end %>
+	<div>
+	</br>
+		<h1><span>Subtotal Price: <%= number_to_currency(current_order.subtotal) %></span></h1> </br>		
+	</div>
 <% else %>
 
 <% end %>
