@@ -2,8 +2,10 @@ module ApplicationHelper
   def current_order
 		if !session[:order_id].nil?
 			Order.find(session[:order_id])
-		else
+		elsif customer_signed_in?
       current_customer.orders.build
-		end
+		else
+      Order.new
+    end
 	end
 end

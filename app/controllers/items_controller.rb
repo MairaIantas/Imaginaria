@@ -25,4 +25,5 @@ class ItemsController < ApplicationController
     def item_params
       params.require(:item).permit(:product_id, :qnty)
     end
+
 end
