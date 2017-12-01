@@ -6,34 +6,39 @@
 	</ul>
 <% end %>
 <% if @order_item.size > 0 %>
-	<% @order_item.each do |item| %>
-		<div class="well">
-			<div class="row">
-				<div class="col-sm-8">
-					<h3><%= item.product.name %></h3>
-				</div>
-				<div class="col-sm-4">
-					<div class="pull-right">
-					<%= form_for(item, remote: true) do |f| %>
-						<%= f.hidden_field :product_id, value: item.product.id %>
-						<h5><%= number_to_currency(item.product.price) %></h5>
-						<div class="form-group">
-							<%= f.text_field :qnty, value: item.qnty.to_i, min: 1, class: 'form-control' %>
-						</div>
-						<div class="btn-group">
-							<%= f.submit "Update Quantity", class: 'btn btn-primary' %>
-							<%= link_to "Delete", item, method: :delete, remote: true, class: 'btn btn-danger'  %>
-						</div>
-					<% end %>
-					</div>
-				</div>
-			</div>
-		</div>
-	<% end %>
-	<div>
-	</br>
-		<h1><span>Subtotal Price: <%= number_to_currency(current_order.subtotal) %></span></h1> </br>		
+	<div class="container">
+		<h2>My Shopping Cart</h2>
+		<br/>
+		<br/>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Product</th>
+					<th>Quantity</th>
+					<th></th>
+					<th>Price</th>
+				</tr>
+			</thead>
+			<tbody>
+			<% @order_item.each do |item| %>
+				<%= form_for(item, remote: true) do |f| %>
+					<%= f.hidden_field :product_id, value: item.product.id %>
+						<tr>
+							<td><%= item.product.name %></td>
+							<td><%= f.text_field :qnty, value: item.qnty.to_i, min: 1, class: 'form-control form-control-sm' %></td>
+							<td><%= f.submit "Update Quantity", class: 'btn btn-primary' %>
+									<%= link_to "Delete", item, method: :delete, remote: true, class: 'btn btn-danger'  %>
+							</td>
+							<td><%= number_to_currency(item.product.price) %></td>
+						</tr>
+				<% end %>
+			<% end %>
+			<tr>
+				 <th scope="row">Subtotal: </th>
+				 <td colspan="2"></td>
+				 <td><b><%= number_to_currency(current_order.subtotal) %></b></td>
+		 	</tr>
+			</tbody>
+		</table>
 	</div>
-<% else %>
-
 <% end %>
