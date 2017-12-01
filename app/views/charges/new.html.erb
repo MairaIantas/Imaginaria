@@ -1,4 +1,4 @@
-<%= form_tag charges_path do %>
+<%= form_tag charges_path, method: :post do %>
   <article>
     <%= render "carts/cart_item" %>
     <% if flash[:error].present? %>
@@ -9,13 +9,16 @@
     <label class="amount">
       <span>Total: <%= number_to_currency(@amount/100) %></span>
     </label>
+    <div class="">
+      <% if customer_signed_in? %>
+        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                data-description="<%= @description %>"
+                data-amount="<%= @amount %>"
+                data-locale="auto"></script>
+                  <% else %>
+                  <p> Log in first</p>
+      <% end %>
+    </div>
   </article>
-
-
 <% end %>
-
-<script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-        data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-        data-description="<%= @description %>"
-        data-amount="<%= @amount %>"
-        data-locale="auto"></script>

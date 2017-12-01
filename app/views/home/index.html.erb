@@ -3,9 +3,7 @@
    <h1 class="my-4">Home</h1>
    <div class="list-group">
      <% @categories.each do |category| %>
-        <div class="list-group-item">
-          <%= link_to category.name , category_path(category) %>
-        </div>
+          <%= link_to category.name , category_path(category) , class: 'list-group-item' %>
      <% end %>
    </div>
  </div>
@@ -50,6 +48,7 @@
 
  <!-- Pagination -->
 <div class="container">
+
   <div class="apple_pagination">
      <div class="page_info">
        <%= page_entries_info @products %>

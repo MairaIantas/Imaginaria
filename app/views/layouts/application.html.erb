@@ -6,15 +6,14 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-
     <title>Imaginaria</title>
     <%= csrf_meta_tags %>
-    <!-- <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %> -->
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <!-- Bootstrap core CSS -->
     <link href="https://blackrockdigital.github.io/startbootstrap-shop-homepage/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
-   <link href="https://blackrockdigital.github.io/startbootstrap-shop-homepage/css/shop-homepage.css" rel="stylesheet">
+   <!-- <link href="https://blackrockdigital.github.io/startbootstrap-shop-homepage/css/shop-homepage.css" rel="stylesheet"> -->
    <!-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> -->
    <script src="https://js.stripe.com/v3/"></script>
  </head>
@@ -60,15 +59,19 @@
           <ul class="nav navbar-nav navbar-right">
               <li class="active cart"><%= render 'layouts/cart' %></li>
           </ul>
-          <ul class="navbar-nav ml-auto">
-              <li class="nav-item active">
-                <% if !customer_signed_in? %>
-                  <%= link_to "Sign in",  new_customer_session_path, method: :new %>﻿
-                <% else %>
-                  <%= link_to "Sign out", destroy_customer_session_path, method: :delete %>﻿
-                <% end %>
-              </li>
-          </ul>        
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <% if !customer_signed_in? %>
+                  <%= link_to new_customer_session_path, method: :new do %>
+                    <span class="glyphicon glyphicon-user"></span> Log In
+                  <% end %>
+              <% else %>
+                  <%= link_to destroy_customer_session_path, method: :delete do %>
+                    <span class="glyphicon glyphicon-log-out"></span> Log Out
+                  <% end %>
+              <% end %>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>
