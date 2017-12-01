@@ -1,3 +1,6 @@
-<%= link_to "#{current_order.items.size} items in card and price #{current_order.subtotal}", carts_path %>
- <!-- <span class="badge">12</span> -->
- <!-- https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_list_group_badge&stacked=h -->
+<!-- <%= link_to "#{current_order.items.size} items in card and price #{current_order.subtotal}", carts_path %> -->
+
+ <%= link_to carts_path do %>
+  <span class="badge"><%= current_order.items.size %></span>
+  <span class="glyphicon glyphicon-shopping-cart"></span>
+ <% end %>
