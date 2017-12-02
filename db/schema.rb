@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20171130014314) do
   end
 
   create_table "addresses", force: :cascade do |t|
-    t.string "address"
+    t.string "street"
     t.boolean "is_billing_address"
     t.string "number"
     t.string "zipcode"
@@ -82,11 +82,6 @@ ActiveRecord::Schema.define(version: 20171130014314) do
   create_table "countries", force: :cascade do |t|
     t.string "name"
     t.string "code"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "customer_addresses", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

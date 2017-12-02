@@ -1,3 +1,4 @@
 class Address < ApplicationRecord
-  has_and_belong_to_many : customers
-end 
+  has_many :customer_addresses
+  has_many :customer, through: :customer_addresses
+end

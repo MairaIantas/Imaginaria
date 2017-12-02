@@ -1,11 +1,11 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
+# # This file should contain all the record creation needed to seed the database with its default values.
+# # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
+# #
+# # Examples:
+# #
+# #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
+# #   Character.create(name: 'Luke', movie: movies.first)
 #
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
 # AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
 #
 #
@@ -18,12 +18,12 @@
 # # Create list of 10 products for each category
 # # Home Decor
 # home_decor = Category.where(:name => 'Home Decor').first
-# # prod = home_decor.products.build(name: 'Pink Mug',
-# #                                 description:'Flamingo Pink Mug',
-# #                                 price: 19.90,
-# #                                 qty: 10)
-# #
-# # prod.save
+# prod = home_decor.products.build(name: 'Pink Mug',
+#                                 description:'Flamingo Pink Mug',
+#                                 price: 19.90,
+#                                 qty: 10)
+#
+# prod.save
 #
 # prod = home_decor.products.build(name: 'Harry Potter Mug',
 #                                 description:'Harry Potter Mug',

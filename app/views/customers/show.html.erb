@@ -26,4 +26,10 @@
     </div>
       <%= link_to 'Edit', edit_customer_registration_path, class: 'btn btn-primary' %>
   </div>
+
+  <div class="row">
+    <% @current_customer.orders.each do |order| %>
+      <p>Order id: <%= order.id %> </p> </br>
+    <% end %>
+  </div>
 </form>
