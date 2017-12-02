@@ -39,10 +39,10 @@
     <%= f.label :city %><br />
     <%= f.text_field :city %>
   </div>
-  <%= fields_for :province, @customer.province do |prov| %>
-      <%= prov.label :name %><br />
-      <%= prov.collection_select :province_id, Province.all, :id, :name %>
-   <% end %>
+  <div class="field">
+      <%= f.label :province %><br />
+      <%= f.collection_select :province_id, Province.all, :id, :name %>
+  </div>
   <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
