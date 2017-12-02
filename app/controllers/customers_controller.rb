@@ -3,6 +3,5 @@ class CustomersController < ApplicationController
 
   def show
     @customer = Customer.find(current_customer.id)
-    # @address = CustomerAddress.where(:customer_id => @customer.id)
   end
 end
