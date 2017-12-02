@@ -57,3 +57,16 @@
 #                                 price: 69.90,
 #                                 qty: 20)
 # prod.save
+
+
+#provinces
+# Province.create(name: 'British Columbia', code: 'BC', hst: 0, gst: 5, pst: 7)
+# Province.create(name: 'Alberta', code: 'AB', hst: 0, gst: 5, pst: 0)
+# Province.create(name: 'Saskatchewan', code: 'SK', hst: 0, gst: 5, pst: 6)
+# Province.create(name: 'Manitoba', code: 'MB', hst: 0, gst: 5, pst: 8)
+# Province.create(name: 'Ontario', code: 'ON', hst: 13, gst: 0, pst: 0)
+# Province.create(name: 'Quebec', code: 'QC', hst: 0, gst: 5, pst: 9.975)
+# Province.create(name: 'New Brunswick', code: 'NB', hst: 15, gst: 0, pst: 0)
+# Province.create(name: 'Nova Scotia', code: 'NS', hst: 15, gst: 0, pst: 0)
+# Province.create(name: 'Prince Edward Island', code: 'PE', hst: 15, gst: 0, pst: 0)
+# Province.create(name: 'Newfoundland and Labrador', code: 'NL', hst: 15, gst: 0, pst: 0)

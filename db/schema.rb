@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171202192159) do
+ActiveRecord::Schema.define(version: 20171202203143) do
 
   create_table "abouts", force: :cascade do |t|
     t.string "description"
@@ -86,7 +86,9 @@ ActiveRecord::Schema.define(version: 20171202192159) do
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
     t.string "city"
+    t.integer "province_id"
     t.index ["email"], name: "index_customers_on_email", unique: true
+    t.index ["province_id"], name: "index_customers_on_province_id"
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
   end
 
@@ -141,6 +143,16 @@ ActiveRecord::Schema.define(version: 20171202192159) do
     t.string "image"
     t.integer "category_id"
     t.index ["category_id"], name: "index_products_on_category_id"
+  end
+
+  create_table "provinces", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.decimal "hst"
+    t.decimal "gst"
+    t.decimal "pst"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "states", force: :cascade do |t|

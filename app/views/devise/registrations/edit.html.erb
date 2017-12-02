@@ -39,6 +39,10 @@
     <%= f.label :city %><br />
     <%= f.text_field :city %>
   </div>
+  <%= fields_for :province, @customer.province do |prov| %>
+      <%= prov.label :name %><br />
+      <%= prov.collection_select :id, Province.all, :id, :name %>
+   <% end %>
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
