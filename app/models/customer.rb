@@ -5,9 +5,4 @@ class Customer < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :orders
-
-  # has_many :customer_addresses
-  # has_many :address, through: :customer_addresses
-  # accepts_nested_attributes_for :address
-
 end

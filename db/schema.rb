@@ -32,16 +32,6 @@ ActiveRecord::Schema.define(version: 20171130014314) do
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
   end
 
-  create_table "addresses", force: :cascade do |t|
-    t.string "street"
-    t.boolean "is_billing_address"
-    t.string "number"
-    t.string "zipcode"
-    t.string "other"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "admin_users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -67,21 +57,8 @@ ActiveRecord::Schema.define(version: 20171130014314) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "cities", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "contacts", force: :cascade do |t|
     t.string "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "countries", force: :cascade do |t|
-    t.string "name"
-    t.string "code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -92,8 +69,11 @@ ActiveRecord::Schema.define(version: 20171130014314) do
     t.datetime "date_of_birth"
     t.string "phone_number"
     t.string "email"
-    t.string "user_name"
     t.string "password"
+    t.string "street"
+    t.string "number"
+    t.string "zipcode"
+    t.string "other"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "encrypted_password", default: "", null: false
@@ -171,13 +151,6 @@ ActiveRecord::Schema.define(version: 20171130014314) do
 
   create_table "statuses", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "sub_categories", force: :cascade do |t|
-    t.string "name"
-    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
