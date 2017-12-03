@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171202203143) do
+ActiveRecord::Schema.define(version: 20171203014616) do
 
   create_table "abouts", force: :cascade do |t|
     t.string "description"
@@ -113,6 +113,7 @@ ActiveRecord::Schema.define(version: 20171202203143) do
     t.decimal "subtotal"
     t.decimal "total"
     t.integer "customer_id", default: 1
+    t.decimal "hst"
     t.index ["customer_id"], name: "index_orders_on_customer_id"
   end
 

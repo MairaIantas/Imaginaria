@@ -1,11 +1,11 @@
-<% if @order_item.nil? && @order_item.errors.any? %>
+<% if @order.nil? && @order.errors.any? %>
 	<ul>
-		<% @order_item.errors.full_messages.each do |msg| %>
+		<% @order.errors.full_messages.each do |msg| %>
 			<li><%= msg %></li>
 		<% end %>
 	</ul>
 <% end %>
-<% if @order_item.size > 0 %>
+<% if @order.items.size > 0 %>
 	<div class="container">
 		<h2>My Shopping Cart</h2>
 		<br/>
@@ -20,7 +20,7 @@
 				</tr>
 			</thead>
 			<tbody>
-			<% @order_item.each do |item| %>
+			<% @order.items.each do |item| %>
 				<%= form_for(item, remote: true) do |f| %>
 					<%= f.hidden_field :product_id, value: item.product.id %>
 						<tr>
@@ -36,9 +36,35 @@
 			<tr>
 				 <th scope="row">Subtotal: </th>
 				 <td colspan="2"></td>
-				 <td><b><%= number_to_currency(current_order.subtotal) %></b></td>
+				 <td><%= number_to_currency(current_order.subtotal) %></td>
 		 	</tr>
-			</tbody>
+			<% if (current_customer.province.pst != 0) %>
+				<tr>
+					 <th scope="row">PST (<%= current_customer.province.pst %>)%:</th>
+					 <td colspan="2"></td>
+					 <td><%= number_to_currency(current_order.pst) %></td>
+			 	</tr>
+			<%end%>
+			<% if (current_customer.province.gst != 0) %>
+				<tr>
+					 <th scope="row">GST (<%= current_customer.province.gst %>)%:</th>
+					 <td colspan="2"></td>
+					 <td><%= number_to_currency(current_order.gst) %></td>
+			 	</tr>
+			<%end%>
+			<% if (current_customer.province.hst != 0) %>
+				<tr>
+					 <th scope="row">HST (<%= current_customer.province.hst %>)%:</th>
+					 <td colspan="2"></td>
+					 <td><%=number_to_currency(current_order.hst) %></td>
+				</tr>
+			<%end%>
+			<tr>
+				 <th scope="row">TOTAL: </th>
+				 <td colspan="2"></td>
+				 <td><b><%=number_to_currency(current_order.total) %></b></td>
+			</tr>
+		</tbody>
 		</table>
 	</div>
 <% end %>
