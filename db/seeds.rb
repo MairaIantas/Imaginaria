@@ -7,7 +7,9 @@
 # #   Character.create(name: 'Luke', movie: movies.first)
 #
 # AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
-#
+
+# Customer.create(first_name: 'guest', last_name: 'guest', date_of_birth: '1980-02-02', phone_number: '204 000-000-0000', email: 'guest@guest')
+
 #
 # # Create List of 5 categories
 # Category.create(name: 'Home Decor', description: 'Home Decor items', tag: 'HomeDecor')
@@ -70,3 +72,11 @@
 # Province.create(name: 'Nova Scotia', code: 'NS', hst: 15, gst: 0, pst: 0)
 # Province.create(name: 'Prince Edward Island', code: 'PE', hst: 15, gst: 0, pst: 0)
 # Province.create(name: 'Newfoundland and Labrador', code: 'NL', hst: 15, gst: 0, pst: 0)
+
+# Status
+# Status.create(name: 'New')
+# Status.create(name: 'Processing')
+# Status.create(name: 'Paid')
+# Status.create(name: 'Out for Delivery')
+# Status.create(name: 'Delivered')
+# Status.create(name: 'Cancelled')
