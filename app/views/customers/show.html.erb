@@ -1,35 +1,140 @@
-<form>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6 mb-3">
+<!-- <div class="col-lg-9">
+   <h1 class="my-4">My Perfil</h1>
+
+      <div class="col-md-4">
         <label for="firtname">First name: </label>
         <label for=""><%= @customer.first_name %></label>
       </div>
-      <div class="col-md-6 mb-3">
+      <div class="col-md-4">
         <label for="lastname">Last name: </label>
         <label for=""><%= @customer.last_name %></label>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6 mb-3">
+      <div class="col-md-4">
         <label for="dob">Date of Birthday: </label>
         <label for="dob"><%= @customer.date_of_birth %></label>
       </div>
-      <div class="col-md-3 mb-3">
+      <div class="col-md-4">
         <label for="phone">Phone Number:</label>
         <label for="phone"><%= @customer.phone_number %></label>
       </div>
-      <div class="col-md-3 mb-3">
+      <div class="col-md-4">
         <label for="email">Email:</label>
         <label for="phone"><%= @customer.email %></label>
       </div>
-    </div>
+
+    <div class="row">
       <%= link_to 'Edit', edit_customer_registration_path, class: 'btn btn-primary' %>
   </div>
-
   <div class="row">
     <% @current_customer.orders.each do |order| %>
       <p>Order id: <%= order.id %> </p> </br>
     <% end %>
   </div>
-</form>
+</div> -->
+<div class="container">
+  <p><h1>My information</h1></br></p>
+  <div class="row">
+    <div class="col-lg-9">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <label for="firstname">First name: </label>
+          <label for="firstname"><%= @customer.first_name %></label></br>
+          <label for="lastname">Last name: </label>
+          <label for="lastname"><%= @customer.last_name %></label></br>
+          <label for="street">Street: </label>
+          <label for="street"><%= @customer.street %></label></br>
+          <label for="city">City: </label>
+          <label for="city"><%= @customer.city %></label></br>
+          <label for="province">Province: </label>
+          <label for="Province"><%= @customer.province.name %></label>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-9">
+      <% @current_customer.orders.each do |order| %>
+        <div class="panel-group">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" href="#collapse<%= order.id %>">Order id: <%= order.id %> </a>
+            </h4>
+          </div>
+            <div id="collapse<%= order.id %>" class="panel-collapse collapse">
+              <div class="panel-body">
+                <div class="table-responsive">
+                  <table class="table table-condensed">
+                    <thead>
+                      <tr>
+                        <td><strong>Item</strong></td>                      
+                        <td class="text-center"><strong>Quantity</strong></td>
+                          <td class="text-center"><strong>Price</strong></td>
+                        <td class="text-right"><strong>Totals</strong></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <!-- foreach ($order->lineItems as $line) or some such thing here -->
+                      <% order.items.each do |item| %>
+                        <tr>
+                          <td><%= item.product.name %></td>
+                          <td class="text-center"><%= item.qnty %></td>
+                          <td class="text-center"><%= number_to_currency(item.price) %></td>
+                          <td class="text-right"><%= number_to_currency(item.qnty* item.price) %></td>
+                        </tr>
+                      <%end%>
+                      <tr>
+                        <td class="thick-line"></td>
+                        <td class="thick-line"></td>
+                        <td class="thick-line text-center"><strong>Subtotal</strong></td>
+                        <td class="thick-line text-right"><%= number_to_currency(order.subtotal) %></td>
+                      </tr>
+                      <tr>
+                        <td class="no-line"></td>
+                        <td class="no-line"></td>
+                        <td class="no-line text-center"><strong>Shipping</strong></td>
+                        <td class="no-line text-right">$15</td>
+                      </tr>
+                      <% if (order.pst != 0) %>
+                          <tr>
+                           <td class="no-line"></td>
+                           <td class="no-line"></td>
+                           <td class="no-line text-center"><strong>GST</strong></td>
+                           <td class="no-line text-right"><%= number_to_currency(order.pst) %></td>
+                          </tr>
+                      <%end%>
+                      <% if (order.gst != 0) %>
+                          <tr>
+                           <td class="no-line"></td>
+                           <td class="no-line"></td>
+                           <td class="no-line text-center"><strong>PST</strong></td>
+                           <td class="no-line text-right"><%= number_to_currency(order.gst) %></td>
+                          </tr>
+                      <%end%>
+                      <% if (order.hst != 0) %>
+                          <tr>
+                           <td class="no-line"></td>
+                           <td class="no-line"></td>
+                           <td class="no-line text-center"><strong>HST</strong></td>
+                           <td class="no-line text-right"><%= number_to_currency(order.hst) %></td>
+                          </tr>
+                      <%end%>
+                        <td class="no-line"></td>
+                        <td class="no-line"></td>
+                        <td class="no-line text-center"><strong>Total</strong></td>
+                        <td class="no-line text-right"><%= number_to_currency(order.total + 15)%></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+        			</div>
+              <div class="panel-footer">Status : <%= order.status.name %></div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-lg-9">
+      <%= link_to 'Edit', edit_customer_registration_path, class: 'btn btn-primary' %>
+    </div>
+
+  </div>
+</div>

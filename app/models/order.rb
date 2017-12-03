@@ -2,6 +2,7 @@ class Order < ApplicationRecord
   has_many :items
   before_save :set_subtotal, :set_gst, :set_pst, :set_hst, :set_total
   belongs_to :customer
+  belongs_to :status
 
   def subtotal
     items.collect { |item| item.valid? ? (item.price * item.qnty) : 0 }.sum
