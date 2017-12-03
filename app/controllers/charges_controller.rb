@@ -1,20 +1,23 @@
 class ChargesController < ApplicationController
   def new
-    @amount = get_subtotal
-    @description = 'Description of Charge'
-    @order_item = current_order.items
+    @order = current_order
+    @amount = current_order.total * 100
   end
 
   def create
-     @amount = get_subtotal #get_subtotal # $5 in cents
+    @amount = get_total  #get_subtotal # $5 in cents
 
-    # @customer = Stripe::Customer.create(email:  params[:stripeEmail],
-                                       # source: params[:stripeToken])
+    @customer = Stripe::Customer.create(email:  params[:stripeEmail],
+                                       source: params[:stripeToken])
 
-    @charge = Stripe::Charge.create(customer:    current_customer.id,
+    @charge = Stripe::Charge.create(customer:    @customer,
                                     amount:      @amount,
-                                    description: 'Rails Stripe customer',
+                                    description: 'Imaginaria, thanks for buying with us! ',
                                     currency:    'cad')
+
+
+    @order = current_order
+    @order.update(status_id: 3)
 
   rescue Stripe::CardError => e
     flash[:error] = e.message
@@ -22,8 +25,8 @@ class ChargesController < ApplicationController
   end
 
   private
-  def get_subtotal
-    (current_order.subtotal * 100)
+  def get_total
+    (current_order.total.to_i * 1000)
   end
 
 end

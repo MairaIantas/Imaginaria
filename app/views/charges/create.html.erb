@@ -1,7 +1,132 @@
-<h2>Thanks, you paid <strong><%= number_to_currency(@charge.amount / 100) %></strong>!</h2>
-
+<!-- <h2>Thanks, you paid <strong><%= number_to_currency(@charge.amount / 100) %></strong>!</h2> -->
+<!--
 <h3>Stripe Customer</h3>
 <%= debug @customer %>
 
 <h3>Stripe Charge</h3>
-<%= debug @charge %>
+<%= debug @charge %> -->
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+    		<div class="invoice-title">
+    			<h2>Invoice</h2><h3 class="pull-right">Order # 12345</h3>
+    		</div>
+      </br>
+    		<hr>
+    		<div class="row">
+    			<div class="col-xs-6">
+    				<address>
+    				<strong>Billed To:</strong><br>
+    					<%= current_customer.first_name %> <%= current_customer.last_name %><br>
+    					<%= current_customer.number %> <%= current_customer.street %><br>
+    					<%= current_customer.other %><br>
+    					<%= current_customer.city %>,<%= current_customer.zipcode %>
+    				</address>
+    			</div>
+    			<div class="col-xs-6 text-right">
+    				<address>
+        			<strong>Shipped To:</strong><br>
+              <%= current_customer.first_name %> <%= current_customer.last_name %><br>
+    					<%= current_customer.number %> <%= current_customer.street %><br>
+    					<%= current_customer.other %><br>
+    					<%= current_customer.city %>, <%= current_customer.zipcode %>
+    				</address>
+    			</div>
+    		</div>
+    		<div class="row">
+    			<div class="col-xs-6">
+    				<address>
+    					<strong>Payment Method:</strong><br>
+    					Visa ending **** 4242<br>
+    					<%= current_customer.email %>
+    				</address>
+    			</div>
+    			<div class="col-xs-6 text-right">
+    				<address>
+    					<strong>Order Date:</strong><br>
+    					March 7, 2014<br><br>
+    				</address>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+
+    <div class="row">
+    	<div class="col-md-12">
+    		<div class="panel panel-default">
+    			<div class="panel-heading">
+    				<h3 class="panel-title"><strong>Order summary</strong></h3>
+    			</div>
+    			<div class="panel-body">
+    				<div class="table-responsive">
+    					<table class="table table-condensed">
+    						<thead>
+                                <tr>
+        							<td><strong>Item</strong></td>
+        							<td class="text-center"><strong>Price</strong></td>
+        							<td class="text-center"><strong>Quantity</strong></td>
+        							<td class="text-right"><strong>Totals</strong></td>
+                                </tr>
+    						</thead>
+    						<tbody>
+    							<!-- foreach ($order->lineItems as $line) or some such thing here -->
+                  <% current_order.items.each do |item| %>
+            				<%= form_for(item, remote: true) do |f| %>
+            					<%= f.hidden_field :product_id, value: item.product.id %>
+            						<tr>
+            							<td><%= item.product.name %></td>
+            							<td class="text-center"><%= item.qnty %></td>
+            							<td class="text-center"><%= number_to_currency(item.price) %></td>
+                          <td class="text-right"><%= number_to_currency(item.qnty* item.price) %></td>
+            						</tr>
+            				<% end %>
+            			<% end %>
+    							<tr>
+    								<td class="thick-line"></td>
+    								<td class="thick-line"></td>
+    								<td class="thick-line text-center"><strong>Subtotal</strong></td>
+    								<td class="thick-line text-right"><%= number_to_currency(current_order.subtotal) %></td>
+    							</tr>
+    							<tr>
+    								<td class="no-line"></td>
+    								<td class="no-line"></td>
+    								<td class="no-line text-center"><strong>Shipping</strong></td>
+    								<td class="no-line text-right">$15</td>
+    							</tr>
+                  <% if (current_customer.province.pst != 0) %>
+                      <tr>
+                       <td class="no-line"></td>
+                       <td class="no-line"></td>
+                       <td class="no-line text-center"><strong>GST</strong></td>
+                       <td class="no-line text-right"><%= number_to_currency(current_order.pst) %></td>
+                      </tr>
+                  <%end%>
+                  <% if (current_customer.province.gst != 0) %>
+              				<tr>
+                       <td class="no-line"></td>
+                       <td class="no-line"></td>
+                       <td class="no-line text-center"><strong>PST</strong></td>
+                       <td class="no-line text-right"><%= number_to_currency(current_order.gst) %></td>
+                     	</tr>
+            			<%end%>
+                  <% if (current_customer.province.hst != 0) %>
+              				<tr>
+                       <td class="no-line"></td>
+                       <td class="no-line"></td>
+                       <td class="no-line text-center"><strong>HST</strong></td>
+                       <td class="no-line text-right"><%= number_to_currency(current_order.hst) %></td>
+                     	</tr>
+            			<%end%>
+    								<td class="no-line"></td>
+    								<td class="no-line"></td>
+    								<td class="no-line text-center"><strong>Total</strong></td>
+    								<td class="no-line text-right"><%= number_to_currency(current_order.total + 15)%></td>
+    							</tr>
+    						</tbody>
+    					</table>
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+</div>
