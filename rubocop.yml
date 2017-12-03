@@ -1,11 +1,13 @@
 AllCops:
   Exclude:
-    - db/**/*
-    - config/**/*
-    - script/**/*
-    - bin/**/*
-    - test/**/*
-    - app/admin/**/*
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'bin/**/*'
+    - 'test/**/*'
+    - 'app/admin/**/*'
+    - 'app/uploaders/*'
+    - 'Gemfile'
 
 Encoding:
   Enabled: false
@@ -14,4 +16,4 @@ Documentation:
   Enabled: false
 
 Metrics/LineLength:
-  Max: 99
+  Max: 250
