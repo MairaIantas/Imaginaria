@@ -9,4 +9,7 @@ class RegistrationsController < Devise::RegistrationsController
     params.require(:customer).permit(:first_name, :last_name, :date_of_birth, :phone_number, :email, :password, :password_confirmation, :current_password, :street, :number, :zipcode, :city, :province_id)
   end
 
+  redirect_to home_path,
+  error: "An error in RegistrationsController"
+
 end
