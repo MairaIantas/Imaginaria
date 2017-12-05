@@ -1,10 +1,3 @@
-<!-- <h2>Thanks, you paid <strong><%= number_to_currency(@charge.amount / 100) %></strong>!</h2> -->
-<!--
-<h3>Stripe Customer</h3>
-<%= debug @customer %>
-
-<h3>Stripe Charge</h3>
-<%= debug @charge %> -->
 <div class="container">
     <div class="row">
         <div class="col-xs-12">
@@ -71,6 +64,7 @@
     						<tbody>
     							<!-- foreach ($order->lineItems as $line) or some such thing here -->
                   <% current_order.items.each do |item| %>
+                  <% if !item.nil? %>
             				<%= form_for(item, remote: true) do |f| %>
             					<%= f.hidden_field :product_id, value: item.product.id %>
             						<tr>
@@ -80,7 +74,8 @@
                           <td class="text-right"><%= number_to_currency(item.qnty* item.price) %></td>
             						</tr>
             				<% end %>
-            			<% end %>
+        			     <% end %>
+                  <% end %>
     							<tr>
     								<td class="thick-line"></td>
     								<td class="thick-line"></td>

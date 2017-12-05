@@ -1,7 +1,7 @@
 class ChargesController < ApplicationController
   def new
     @order = current_order
-    @amount = current_order.total * 100
+    @amount = total
   end
 
   def create
@@ -13,7 +13,8 @@ class ChargesController < ApplicationController
                                     currency: 'cad')
 
     @order = current_order
-    @order.update(status_id: 3)
+    @order.update(status_id: 3)  
+    session.delete(:order_id)
   rescue Stripe::CardError => e
     flash[:error] = e.message
     redirect_to new_charge_path
@@ -22,6 +23,6 @@ class ChargesController < ApplicationController
   private
 
   def total
-    (current_order.total.to_i * 1000)
+    (current_order.total.to_i + 15) * 100
   end
 end
